@@ -1,0 +1,1 @@
+dir ='C:\\Yingming Fang\\project\\Python\\gitPython\\'file = open(dir+'abc.txt','r+')contend =file.readlines()print contend[0]result =contend[0] lenth = len(contend[0])print lenthfor st in range(lenth):	print st	print result[st]	if result[st] =='\\n':		print result[st-1]		result[st]='\\n'print resultfile.close()
