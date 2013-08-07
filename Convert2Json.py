@@ -1,6 +1,12 @@
+#!/usr/bin/python
 import json
-inputFileName='C:/Yingming Fang/project/Python/gitPython/job.properties'
-outputFileName='C:/Yingming Fang/project/Python/gitPython/system.indexes.json'
+import sys
+#inputFileName='C:/Yingming Fang/project/Python/gitPython/job.properties'
+#outputFileName='C:/Yingming Fang/project/Python/gitPython/system.indexes.json'
+inputFileName=sys.argv[1]
+outputFileName=sys.argv[2]
+print inputFileName
+#print outputFileName
 '''
 keywords B13keyColumns;B13relation
 '''
@@ -23,7 +29,7 @@ def extractRelationAndKeys(line,sepFirst,sepSecond,sepThird):
 	while index!=-1:
 		index =line.find(sepSecond,start)
 		relations.append(line[start:index])
-		
+
 		index = line.find(sepThird,index)
 		if index==-1:
 			break
@@ -48,21 +54,21 @@ def initialRecord(version,database):
 input = open(inputFileName,'Ur')
 outFile = open(outputFileName,'w+')
 lines =input.readlines()
-print len(lines)
+#print len(lines)
 for i in range(len(lines)):
-	print i;
+#	print i;
 	if linevalidate(lines[i],'relation')==False:
 		continue
 	else:
-		print lines[i]
+#		print lines[i]
 		relationLine = lines[i]
 		relation = extractRelationAndKeys(relationLine,'=','$','}')
-		print "relation:%s" %(relation)
+#		print "relation:%s" %(relation)
 		i=i+1
 		keysLine=lines[i]
-		print lines[i]
+#		print lines[i]
 		keyColumn = extractRelationAndKeys(keysLine,'=','$','}')
-		print "keyColumn:%s" %(keyColumn)
+#		print "keyColumn:%s" %(keyColumn)
 		for j in range(len(relation)):
 			out = initialRecord(1,'c1_v5')
 			key={}
@@ -77,7 +83,7 @@ for i in range(len(lines)):
 			out['ns']=ns
 			name = name[0:len(name)-1]
 			out['name']=name
-			print json.dumps(out)
+#			print json.dumps(out)
 			outFile.write(json.dumps(out))
 			outFile.write('\n')
 
