@@ -31,7 +31,7 @@ def json2bson(threadId,threadName, filename):
 
 print 'python executes start time:%s',time.ctime(time.time())
 pythonlog = open ('python_json_bson_log.txt','a')
-pythonlog.write('python executes start time: '+ str(time.ctime(time.time()))+'/n')
+pythonlog.write('python executes start time: '+ str(time.ctime(time.time()))+'\n')
 outputFile="outPut.txt"
 prefix="sub"
 hdfs_dir="/projects/assetcommander/lhp_product/output/frontend_product_2_outputs"
@@ -53,7 +53,7 @@ allFiles=[]
 for i in range(part):
     inputFile = prefix+str(i)
     input = open(inputFile,'w+')
-    pythonlog.write(str(time.ctime(time.time()))+'add sub file: '+inputFile+'/n')
+    pythonlog.write(str(time.ctime(time.time()))+'add sub file: '+inputFile+'\n')
     allFiles.append(inputFile)
     if i<part-1:
         input.writelines(totalcontend[i*section:i*section+section])
@@ -67,24 +67,24 @@ for i in range(len(allFiles)):
     threadname = "Thread-"+str(i)
     threads.append(JsonBsonConvert(i, threadname, allFiles[i]))
 print 'start to execut sub thread'
-pythonlog.write(str(time.ctime(time.time()))+'start to execut sub thread' +'/n')
+pythonlog.write(str(time.ctime(time.time()))+'start to execut sub thread' +'\n')
 for thread in threads:
     thread.start()
 
 for thread in threads:
     thread.join()
 print 'python executes end time:%s',time.ctime(time.time())
-pythonlog.write('python executes end time:'+str(time.ctime(time.time()))+'/n')
+pythonlog.write('python executes end time:'+str(time.ctime(time.time()))+'\n')
 
 print 'start to delete temporary files'
 for i in range(len(allFiles)):
     subprocess.call(['rm',allFiles[i]])
     print 'delete file %s' %(allFiles[i])
-    pythonlog.write(str(time.ctime(time.time()))+'delete file: ' +allFiles[i]+'/n')
+    pythonlog.write(str(time.ctime(time.time()))+'delete file: ' +allFiles[i]+'\n')
 
 subprocess.call(['rm',outputFile])
 print 'delete file %s' %(outputFile)
-pythonlog.write(str(time.ctime(time.time()))+'delete file: ' +outputFile+'/n')
+pythonlog.write(str(time.ctime(time.time()))+'delete file: ' +outputFile+'\n')
 print "Exiting Main Thread"
-pythonlog.write(str(time.ctime(time.time()))+'Exiting Main Thread'+'/n')
+pythonlog.write(str(time.ctime(time.time()))+'Exiting Main Thread'+'\n')
 pythonlog.close()
