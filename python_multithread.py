@@ -44,7 +44,11 @@ outfile.close()
 inputfile = open(outputFile,'r+')
 part = int(sys.argv[1])
 totalcontend=inputfile.readlines()
+for file  in totalcontend:
+	if file.endswith('.json') == False:
+		totalcontend.remove(file)
 
+		
 section = len(totalcontend)/int(part)
 start = 0
 allFiles=[]
